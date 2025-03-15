@@ -63,3 +63,20 @@
     background-color: #323232cc;
     border: 1px solid #3f3f3f !important;
 }
+
+/* Add to navbar.css */
+@media (max-width: 400px) {
+ 
+    .container{
+        width: fit-content;
+        
+        .item:nth-child(3),
+        .item:nth-child(4) {
+           display: none;
+           
+        }
+        .item:nth-child(5){
+            margin-left: 4px;
+        }
+    }
+}
