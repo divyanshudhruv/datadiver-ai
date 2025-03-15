@@ -5,6 +5,16 @@
 
 <br>
 
+![GitHub stars](https://img.shields.io/github/stars/divyanshudhruv/datadiver-ai?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/divyanshudhruv/datadiver-ai.svg?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/divyanshudhruv/datadiver-ai.svg?style=for-the-badge)
+![GitHub contributors](https://img.shields.io/github/contributors/divyanshudhruv/datadiver-ai.svg?style=for-the-badge)
+![Top language](https://img.shields.io/github/languages/top/divyanshudhruv/datadiver-ai.svg?style=for-the-badge)
+
+<table><tr><a href="https://github.com/mostypc123/XediX"><img src="https://xedix.w3spaces.com/xedix-shield.png" alt="Made with XediX" height="35"></a></th></tr></table>
+
+<br>
+
 > [!IMPORTANT]<br>
 > Extract **`structured data`** from any website with a simple **`API`**!🚀
 
