@@ -18,11 +18,11 @@ export function Text() {
 
   const scrapeWebsite = async () => {
     if (!url) return;
-    
+
     try {
       // Set loading state
       setScrapeStatus("Scraping");
-      
+
       const response = await fetch("/api/scrape", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -49,7 +49,7 @@ export function Text() {
       .replace(/"([^"]+)":/g, '<span class="json-key">"$1"</span>:') // Keys
       .replace(/:\s*"([^"]+)"/g, (match, p1) => {
         return match.includes("{") || match.includes("[")
-          ? `: <span class="json-sub-string">"${p1}"</span>` // Sub-key strings
+          ? `: <span class="json-list-string">"${p1}"</span>` // Sub-key strings
           : `: <span class="json-string">"${p1}"</span>`; // Normal strings
       })
       .replace(/:\s*(\d+)/g, ': <span class="json-number">$1</span>') // Numbers
@@ -58,7 +58,11 @@ export function Text() {
       .replace(/\[/g, '<span class="json-sub-array">[</span>') // JSON Array Start
       .replace(/}/g, '<span class="json-sub-object">}</span>') // JSON Object End
       .replace(/\]/g, '<span class="json-sub-array">]</span>') // JSON Array End
-      .replace(/\n/g, "<br>");
+      .replace(/\n/g, "<br>")
+      .replace(/true/g, '<span class="json-boolean">true</span>')
+      .replace(/false/g, '<span class="json-boolean">false</span>')
+      .replace(/,/g, '<span class="json-coma">,</span>');
+
   };
 
   return (
@@ -76,7 +80,11 @@ export function Text() {
           value={url}
           spellCheck="false"
         />
-        <button onClick={scrapeWebsite} className="diveButton">
+        <button onClick={scrapeWebsite} className="diveButton" onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            scrapeWebsite();
+          }
+        }} >
           {scrapeStatus ? (
             "Processing..."
           ) : (
