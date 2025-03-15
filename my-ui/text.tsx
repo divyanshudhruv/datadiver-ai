@@ -1,4 +1,5 @@
 "use client";
+import { Copy } from "lucide-react";
 import "./text.css";
 import { useState } from "react";
 
@@ -35,6 +36,7 @@ export function Text() {
       // Update with the response data
       setJsonData(data);
       setScrapeStatus(null);
+      setUrl("");
     } catch (error: any) {
       console.error("Error scraping:", error.message);
       setJsonData({ success: false, url, error: error.message });
@@ -79,12 +81,16 @@ export function Text() {
           onChange={(e) => setUrl(e.target.value)}
           value={url}
           spellCheck="false"
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              scrapeWebsite();
+              document.activeElement instanceof HTMLElement && document.activeElement.blur();
+              setScrapeStatus(null);
+            }
+          }}
         />
-        <button onClick={scrapeWebsite} className="diveButton" onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            scrapeWebsite();
-          }
-        }} >
+        <button onClick={scrapeWebsite} className="diveButton"  >
           {scrapeStatus ? (
             "Processing..."
           ) : (
@@ -92,7 +98,14 @@ export function Text() {
           )}
         </button>
       </div>
-      <div className="code-container">
+      <div className="code-container"><div className="copy" onClick={() => {
+        const textToCopy = typeof jsonData === 'string' 
+          ? jsonData 
+          : jsonData === null 
+            ? "{}" 
+            : JSON.stringify(jsonData, null, 2);
+        navigator.clipboard.writeText(textToCopy);
+      }}><Copy size={16} /></div>
         <pre dangerouslySetInnerHTML={{ __html: highlightJson(jsonData) }} />
       </div>
     </div>

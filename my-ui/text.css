@@ -77,6 +77,9 @@
             &:hover {
                 background-color: #1e1e1e;
             }
+            &:active{
+                background-color: #1b1b1b;
+            }
         }
 
         input {
@@ -112,6 +115,7 @@
 }
 
 
+
 .code-container {
     background-color: #1e1e1e;
     width: 500px;
@@ -124,10 +128,33 @@
     color: #949494;
     word-wrap: break-word;
     white-space: pre-wrap;
+    position: relative;
     text-align: left;
     align-items: start;
     justify-content: start;
 
+    .copy{
+        display: flex;
+        position: absolute;
+        right: 14px;
+        top: 15px;
+        cursor: pointer;
+        border: 1px solid #3f3f3f;
+        background-color: transparent;
+        color: #949494;
+        width: 30px;
+        height: 30px;
+        align-items: center;
+        border-radius: 9px;
+        justify-content: center;
+
+        &:hover{
+            background-color: #383838;
+        }
+        &:active{
+            background-color: #3f3f3f;
+        }
+    }
 }
 
 .code-container pre {
