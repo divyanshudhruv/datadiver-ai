@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    position: relative;
+    width: 100vw;
+    height: fit-content;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    background-color: #0a0a0a;
+    /* Base dark color */
+
+    background-image:
+        radial-gradient(at 50.24% 47.29%, #35715030 70px 00px, transparent 80%),
+        /* Radial effect */
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        /* Horizontal grid */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    /* Vertical grid */
+
+    background-size:
+        cover,
+        40px 40px,
+        40px 40px;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: .3s;
+    border-color: transparent;
+}
+
+.containerMax {
+    display: flex;
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    padding-top: 30px;
+}
