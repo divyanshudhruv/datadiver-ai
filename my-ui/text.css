@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Poppins:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .containerText {
     width: fit-content;
     height: fit-content;
     display: flex;
+    padding-bottom: 50px;
     position: relative;
     padding-top: 100px;
     align-items: center;
@@ -45,7 +47,7 @@
         background-color: #222222;
         width: 500px;
         height: 60px;
-        border-radius: 20px;
+        border-radius: 18px;
         border: 1px solid #3f3f3f;
         outline: none;
         align-items: center;
@@ -70,12 +72,18 @@
             margin-right: 10px;
             border: 1px solid #3f3f3f;
             cursor: pointer !important;
+            z-index: 99999;
 
-
+            &:hover {
+                background-color: #1e1e1e;
+            }
+            &:active{
+                background-color: #1b1b1b;
+            }
         }
 
         input {
-            width: 423px;
+            width: 100%;
             height: 60px;
             display: flex;
             position: relative;
@@ -107,9 +115,11 @@
 }
 
 
+
 .code-container {
     background-color: #1e1e1e;
-    width: 600px;
+    width: 500px;
+    min-height: 60px;
     margin-top: 40px;
     border-radius: 20px;
     border: 1px solid #3f3f3f;
@@ -118,10 +128,33 @@
     color: #949494;
     word-wrap: break-word;
     white-space: pre-wrap;
+    position: relative;
     text-align: left;
     align-items: start;
     justify-content: start;
 
+    .copy{
+        display: flex;
+        position: absolute;
+        right: 14px;
+        top: 15px;
+        cursor: pointer;
+        border: 1px solid #3f3f3f;
+        background-color: transparent;
+        color: #949494;
+        width: 30px;
+        height: 30px;
+        align-items: center;
+        border-radius: 9px;
+        justify-content: center;
+
+        &:hover{
+            background-color: #383838;
+        }
+        &:active{
+            background-color: #3f3f3f;
+        }
+    }
 }
 
 .code-container pre {
@@ -158,6 +191,12 @@
     /* Yellow-Green */
 }
 
+/* JSON Comma */
+.code-container .json-coma {
+    color: #9579c3;
+    /* Yellow-Green */
+    font-weight: 400;
+}
 /* JSON Null */
 .code-container .json-null {
     color: #d19a66;
@@ -186,11 +225,54 @@
 
 /* Nested JSON Arrays */
 .code-container .json-sub-array {
-    color: #3cc8da;
+    color: #bd943a;
     /* Cyan */
 }
 
 .code-container .json-sub-string {
     color: #98c379;
     /* Yellow-Green */
+}
+
+
+@media (max-width: 799px) {
+    .textTop{
+        width: 90vw;
+    }
+
+    .textBottom{
+        width: 90vw;
+    }
+
+    .containerText{
+        padding-top: 50px;
+    }
+}
+
+
+@media (max-width: 550px) {
+    .inputContainer {
+        width: 80vw !important;
+        position: relative;
+        padding-right: 0;
+    }
+
+    .diveButton {
+        position: relative !important;
+        right: auto !important;
+        border-radius: 12px;
+        transform: none;
+        top: auto;
+    }
+
+    .inputContainer input {
+        width: 100%;
+        padding-right: 5px !important;
+    }
+
+    .code-container {
+        width: 80vw;
+        min-width: 80vw;
+        max-width: 80vw;
+    }
 }

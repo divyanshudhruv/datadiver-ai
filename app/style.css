@@ -11,7 +11,7 @@ body {
     /* Base dark color */
 
     background-image:
-        radial-gradient(at 50.24% 47.29%, #35715040 100px 00px, transparent 80%),
+        radial-gradient(at 50.24% 47.29%, #35715030 70px 00px, transparent 80%),
         /* Radial effect */
         linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
         /* Horizontal grid */
