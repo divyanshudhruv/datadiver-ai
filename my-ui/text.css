@@ -45,7 +45,7 @@
         background-color: #222222;
         width: 500px;
         height: 60px;
-        border-radius: 20px;
+        border-radius: 18px;
         border: 1px solid #3f3f3f;
         outline: none;
         align-items: center;
@@ -71,7 +71,9 @@
             border: 1px solid #3f3f3f;
             cursor: pointer !important;
 
-
+            &:hover {
+                background-color: #1e1e1e;
+            }
         }
 
         input {
@@ -109,7 +111,8 @@
 
 .code-container {
     background-color: #1e1e1e;
-    width: 600px;
+    width: 500px;
+    min-height: 60px;
     margin-top: 40px;
     border-radius: 20px;
     border: 1px solid #3f3f3f;

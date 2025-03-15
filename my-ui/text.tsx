@@ -2,12 +2,27 @@
 import "./text.css";
 import { useState } from "react";
 
+// Define the type for the scrape response
+interface ScrapeResponse {
+  success: boolean;
+  url: string;
+  data?: any;
+  status?: string;
+  error?: string;
+}
+
 export function Text() {
-  const [jsonData, setJsonData] = useState(null);
+  const [jsonData, setJsonData] = useState<ScrapeResponse | null>(null);
   const [url, setUrl] = useState("");
+  const [scrapeStatus, setScrapeStatus] = useState<string | null>(null);
 
   const scrapeWebsite = async () => {
+    if (!url) return;
+    
     try {
+      // Set loading state
+      setScrapeStatus("Scraping");
+      
       const response = await fetch("/api/scrape", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -17,9 +32,13 @@ export function Text() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Failed to scrape");
 
+      // Update with the response data
       setJsonData(data);
+      setScrapeStatus(null);
     } catch (error: any) {
       console.error("Error scraping:", error.message);
+      setJsonData({ success: false, url, error: error.message });
+      setScrapeStatus(null);
     }
   };
 
@@ -34,13 +53,12 @@ export function Text() {
           : `: <span class="json-string">"${p1}"</span>`; // Normal strings
       })
       .replace(/:\s*(\d+)/g, ': <span class="json-number">$1</span>') // Numbers
-      .replace(/:\s*(true|false)/g, ': <span class="json-boolean">$1</span>') // Boolean
       .replace(/:\s*null/g, ': <span class="json-null">null</span>') // Null
       .replace(/{/g, '<span class="json-sub-object">{</span>') // JSON Object Start
       .replace(/\[/g, '<span class="json-sub-array">[</span>') // JSON Array Start
       .replace(/}/g, '<span class="json-sub-object">}</span>') // JSON Object End
       .replace(/\]/g, '<span class="json-sub-array">]</span>') // JSON Array End
-      .replace(/\n/g, ""); // Remove newlines
+      .replace(/\n/g, "<br>");
   };
 
   return (
@@ -59,7 +77,11 @@ export function Text() {
           spellCheck="false"
         />
         <button onClick={scrapeWebsite} className="diveButton">
-          Scrape
+          {scrapeStatus ? (
+            "Processing..."
+          ) : (
+            "Scrape"
+          )}
         </button>
       </div>
       <div className="code-container">
