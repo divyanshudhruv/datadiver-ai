@@ -1,16 +1,11 @@
 import {
   BookAudio,
-  ChartNoAxesColumn,
   ContainerIcon,
-  DraftingCompass,
-  GitBranchPlusIcon,
-  Github,
+ 
   Home,
   SquareActivityIcon,
-  User,
 } from "lucide-react";
 import "./navbar.css";
-import Link from "next/link";
 
 export function Navbar() {
   return (
