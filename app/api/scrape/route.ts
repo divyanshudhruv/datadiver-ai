@@ -519,14 +519,14 @@ async function optimizeWithMistral(data: {
 
     const result = await response.json();
 
-    // Parse the response content as JSON
+    // Check if the response content is valid JSON
+    const responseContent = result.choices[0].message.content.trim();
     try {
-      const optimizedJson = JSON.parse(
-        result.choices[0].message.content.trim()
-      );
+      const optimizedJson = JSON.parse(responseContent);
       return optimizedJson;
     } catch (parseError) {
       console.error("Error parsing Mistral response as JSON:", parseError);
+      console.error("Response content:", responseContent);
       return data; // Return original data if parsing fails
     }
   } catch (error) {
