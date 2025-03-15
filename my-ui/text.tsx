@@ -12,7 +12,7 @@ interface ScrapeResponse {
 }
 
 export function Text() {
-  const [jsonData, setJsonData] = useState<ScrapeResponse | null>(null);
+  const [jsonData, setJsonData] = useState<ScrapeResponse | null | string>("{}");
   const [url, setUrl] = useState("");
   const [scrapeStatus, setScrapeStatus] = useState<string | null>(null);
 
