@@ -13,7 +13,9 @@ interface ScrapeResponse {
 }
 
 export function Text() {
-  const [jsonData, setJsonData] = useState<ScrapeResponse | null | string>("{}");
+  const [jsonData, setJsonData] = useState<ScrapeResponse | null | string>(
+    "{}"
+  );
   const [url, setUrl] = useState("");
   const [scrapeStatus, setScrapeStatus] = useState<string | null>(null);
 
@@ -64,7 +66,6 @@ export function Text() {
       .replace(/true/g, '<span class="json-boolean">true</span>')
       .replace(/false/g, '<span class="json-boolean">false</span>')
       .replace(/,/g, '<span class="json-coma">,</span>');
-
   };
 
   return (
@@ -85,27 +86,30 @@ export function Text() {
             if (e.key === "Enter") {
               e.preventDefault();
               scrapeWebsite();
-              document.activeElement instanceof HTMLElement && document.activeElement.blur();
-              setScrapeStatus(null);
+              document.activeElement instanceof HTMLElement &&
+                document.activeElement.blur();
             }
           }}
         />
-        <button onClick={scrapeWebsite} className="diveButton"  >
-          {scrapeStatus ? (
-            "Processing..."
-          ) : (
-            "Scrape"
-          )}
+        <button onClick={scrapeWebsite} className="diveButton">
+          {scrapeStatus ? "Processing..." : "Scrape"}
         </button>
       </div>
-      <div className="code-container"><div className="copy" onClick={() => {
-        const textToCopy = typeof jsonData === 'string' 
-          ? jsonData 
-          : jsonData === null 
-            ? "{}" 
-            : JSON.stringify(jsonData, null, 2);
-        navigator.clipboard.writeText(textToCopy);
-      }}><Copy size={16} /></div>
+      <div className="code-container">
+        <div
+          className="copy"
+          onClick={() => {
+            const textToCopy =
+              typeof jsonData === "string"
+                ? jsonData
+                : jsonData === null
+                ? "{}"
+                : JSON.stringify(jsonData, null, 2);
+            navigator.clipboard.writeText(textToCopy);
+          }}
+        >
+          <Copy size={16} />
+        </div>
         <pre dangerouslySetInnerHTML={{ __html: highlightJson(jsonData) }} />
       </div>
     </div>

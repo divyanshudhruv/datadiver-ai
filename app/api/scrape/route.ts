@@ -38,8 +38,27 @@ export async function POST(req: Request) {
       const pageTitle = document.title || "Untitled Page";
 
       // Initialize result object
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const result: any = {
+
+      const result: {
+        title: string;
+        meta: { [key: string]: string };
+        content: {
+          [key: string]: {
+            title: string;
+            level?: number;
+            items: Array<
+              | { type: "paragraph"; text: string }
+              | { type: "link"; url: string; text: string }
+              | { type: "image"; src: string; alt: string }
+              | {
+                  type: "list";
+                  listType: "unordered" | "ordered";
+                  items: string[];
+                }
+            >;
+          };
+        };
+      } = {
         title: pageTitle,
         meta: {},
         content: {},
@@ -379,7 +398,7 @@ export async function POST(req: Request) {
 
       // Remove content object if empty
       if (Object.keys(result.content).length === 0) {
-        delete result.content;
+        result.content = {}; // Works without type issues
       }
 
       return result;
@@ -396,13 +415,13 @@ export async function POST(req: Request) {
       url: fullUrl,
       data: optimizedData,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Scraping error:", error);
     return NextResponse.json(
       {
         success: false,
-        error: error.message || "Failed to scrape website",
+        error:
+          error instanceof Error ? error.message : "Failed to scrape website",
       },
       { status: 500 }
     );
@@ -410,9 +429,23 @@ export async function POST(req: Request) {
 }
 
 // Function to optimize JSON with Mistral API
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-async function optimizeWithMistral(data: any) {
+async function optimizeWithMistral(data: {
+  title: string;
+  meta: { [key: string]: string };
+  content: {
+    [key: string]: {
+      title: string;
+      level?: number;
+      items: Array<
+        | { type: "paragraph"; text: string }
+        | { type: "link"; url: string; text: string }
+        | { type: "image"; src: string; alt: string }
+        | { type: "list"; listType: "unordered" | "ordered"; items: string[] }
+      >;
+    };
+  };
+}) {
   try {
     const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
 
