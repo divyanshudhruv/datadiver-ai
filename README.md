@@ -1,36 +1,150 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🌊 DataDiver AI
 
-First, run the development server:
+**`datadiver-ai`** is the ultimate tool for 📊 web scraping, transforming 🕸️ unstructured websites into ✨ clean JSON. Easily extract 📝 paragraphs, 📋 lists, 🔗 links, and 🖼️ images with our 🧠 AI-powered processing.
+
+<br>
+
+> [!IMPORTANT]<br>
+> Extract **`structured data`** from any website with a simple **`API`**!🚀
+
+<br>
+
+## 🔍 Overview
+
+DataDiver AI is an intelligent web scraping tool that transforms unstructured web pages into **`clean`**, **`organized`** JSON data. Perfect for **`research`**, **`data analysis`**, **`content aggregation`**, and more!
+
+<br>
+
+## ✨ Features
+
+- 🌐 **`Universal Scraping`** - Works with virtually any website
+- 🧠 **`AI-Powered`** - Uses Mistral AI for intelligent data processing
+- 🧩 **`Structured Output`** - Converts messy HTML into clean, consistent JSON
+- 🔄 **`Content Categorization`** - Automatically organizes content by section
+- 📊 **`Rich Content Support`** - Extracts paragraphs, lists, links, and images
+- 💻 **`Simple API`** - Easy-to-use interface for quick integration
+
+<br>
+
+## 🛠️ Tech Stack
+
+- `⚛️` Next.js + React
+- `📘` TypeScript
+- `🔍` JSDOM for HTML parsing
+- `🧠` Mistral API for optimization
+- `🎨` Custom CSS for beautiful UI
+
+<br>
+
+## 📦 Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/divyanshudhruv/datadiver-ai.git
+
+# Navigate to project directory
+cd datadiver-ai
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Add your Mistral API key to .env file
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Start the development server
+npm run dev
 
-## Learn More
+# Open your browser and navigate to
+http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+<br>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📋 Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Web Interface
 
-## Deploy on Vercel
+1. Enter the **`URL`** you want to scrape
+2. Click **`"Scrape"`**
+3. View the structured **`JSON`** output
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### API Example
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```typescript
+// Fetch data from a URL
+const response = await fetch("/api/scrape", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ url: "https://example.com" })
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+<br>
+
+## 📊 Example Response
+
+```json
+{
+  "success": true,
+  "url": "https://example.com",
+  "data": {
+    "title": "Example Website",
+    "meta": {
+      "description": "This is an example website"
+    },
+    "content": {
+      "about_us": {
+        "title": "About Us",
+        "items": [
+          {
+            "type": "paragraph",
+            "text": "We are a sample company demonstrating DataDiver AI"
+          },
+          {
+            "type": "list",
+            "listType": "unordered",
+            "items": ["Feature 1", "Feature 2", "Feature 3"]
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+
+<br>
+
+## 🤝 Contributing
+
+Contributions are **`welcome`**! Please feel free to submit a **`Pull Request`**.
+
+```bash
+# Create a new branch
+git checkout -b feature/amazing-feature
+
+# Make your changes and commit them
+git commit -m 'Add some amazing feature'
+
+# Push to the branch
+git push origin feature/amazing-feature
+
+# Open a Pull Request
+```
+
+<br>
+
+## 📄 License
+
+This project is licensed under the **`MIT License`** - see the **`LICENSE`** file for details.

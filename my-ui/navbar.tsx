@@ -10,6 +10,7 @@ import {
   User,
 } from "lucide-react";
 import "./navbar.css";
+import Link from "next/link";
 
 export function Navbar() {
   return (
@@ -18,21 +19,22 @@ export function Navbar() {
         <Home size={16} />
       </div>
       <div className="seperator"></div>
-      <div
+      <a href="/how"
         className="item"
         style={{ marginRight: "6px !important", marginLeft: "4px !important" }}
       >
         <SquareActivityIcon size={16} />
         <div className="text">How</div>
-      </div>
-      <div className="item" style={{ marginRight: "6px !important" }}>
+      </a>
+      
+      <a href="https://github.com/divyanshudhruv/datadiver-ai/blob/main/examples" className="item" style={{ marginRight: "6px !important" }}>
         <BookAudio size={15} />
-        <div className="text">Analytics</div>{" "}
-      </div>
-      <div className="item">
-        <ContainerIcon size={15} />
-        <div className="text">Github</div>{" "}
-      </div>
+        <div className="text">Examples</div>{" "}
+      </a>
+        <a href="https://github.com/divyanshudhruv/datadiver-ai" className="item">
+          <ContainerIcon size={15} />
+          <div className="text">Github</div>{" "}
+        </a>
     </div>
   );
 }
