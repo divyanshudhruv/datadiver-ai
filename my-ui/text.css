@@ -77,7 +77,8 @@
             &:hover {
                 background-color: #1e1e1e;
             }
-            &:active{
+
+            &:active {
                 background-color: #1b1b1b;
             }
         }
@@ -90,6 +91,7 @@
             border-radius: 20px;
             resize: none;
             background-color: transparent;
+            border: 0px solid transparent !important;
             outline: none;
             padding-right: 20px;
             padding-top: 20px;
@@ -133,7 +135,7 @@
     align-items: start;
     justify-content: start;
 
-    .copy{
+    .copy {
         display: flex;
         position: absolute;
         right: 14px;
@@ -148,10 +150,11 @@
         border-radius: 9px;
         justify-content: center;
 
-        &:hover{
+        &:hover {
             background-color: #383838;
         }
-        &:active{
+
+        &:active {
             background-color: #3f3f3f;
         }
     }
@@ -197,6 +200,7 @@
     /* Yellow-Green */
     font-weight: 400;
 }
+
 /* JSON Null */
 .code-container .json-null {
     color: #d19a66;
@@ -236,16 +240,16 @@
 
 
 @media (max-width: 799px) {
-    .textTop{
+    .textTop {
         width: 90vw;
     }
 
-    .textBottom{
+    .textBottom {
         width: 90vw;
     }
 
-    .containerText{
-        padding-top: 50px;
+    .containerText {
+        padding-top: 60px;
     }
 }
 
@@ -268,6 +272,8 @@
     .inputContainer input {
         width: 100%;
         padding-right: 5px !important;
+        border: 0px solid transparent !important;
+
     }
 
     .code-container {
