@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.container {
+    display: flex;
+    position: relative;
+    width: fit-content;
+    padding-inline: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-height: 41px;
+    border: 1px solid #3f3f3f;
+    border-radius: 15px;
+    background-color: #0f0f0fbb;
+    align-items: center;
+    justify-content: start;
+
+    flex-direction: row;
+
+    .seperator {
+        width: 0.6px;
+        height: 17px;
+        background-color: #3f3f3f;
+    }
+
+    .item {
+        display: flex;
+        width: fit-content;
+        padding-inline: 13px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: start;
+        flex-direction: row;
+        cursor: pointer;
+        border: 1px solid transparent;
+        color: #ccc !important;
+
+        &:hover {
+            background-color: #323232cc;
+            border: 1px solid #3f3f3f;
+        }
+
+         .text {
+            font-size: 12px;
+            text-align: center;
+            display: flex;
+            position: relative;
+            margin-left: 7px;
+            height: fit-content;
+            font-family: "Inter", sans-serif;
+            width: fit-content;
+            align-items: center;
+            top: 0.4px;
+            font-weight: 500;
+            justify-content: center;
+        }
+    }
+}
+
+.item.active {
+    background-color: #323232cc;
+    border: 1px solid #3f3f3f !important;
+}
