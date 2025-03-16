@@ -87,7 +87,7 @@ export async function POST(req: Request) {
       // Helper function to check if an element is likely to contain important content
       const isContentRich = (element: Element): boolean => {
         // Skip elements with minimal text content
-        const text = element.textContent?.trim() || "";
+        const text = element.textContent?.trim() ?? "";
         if (text.length < 20) return false;
 
         // Skip navigation, footer, header elements
@@ -175,10 +175,10 @@ export async function POST(req: Request) {
           const headingLevel = parseInt(heading.tagName.substring(1));
 
           // Create a section key based on heading text
-          const sectionKey = headingText
+            const sectionKey = headingText
             .toLowerCase()
-            .replace(/[^a-z0-9]+/g, "_")
-            .replace(/^_+|_+$/g, "")
+            .replace(/([^a-z0-9]+)/g, "_")
+            .replace(/^(_+)|(_+)$/g, "")
             .substring(0, 30);
 
           // Skip if the section already exists
