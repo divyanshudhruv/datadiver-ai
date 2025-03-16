@@ -12,8 +12,15 @@ interface ScrapeResponse {
   error?: string;
 }
 
+// Define the type for the optimize response
+interface OptimizeResponse {
+  success: boolean;
+  data?: any;
+  error?: string;
+}
+
 export function Text() {
-  const [jsonData, setJsonData] = useState<ScrapeResponse | null | string>(
+  const [jsonData, setJsonData] = useState<ScrapeResponse | OptimizeResponse | null | string>(
     "{}"
   );
   const [url, setUrl] = useState("");
@@ -26,17 +33,49 @@ export function Text() {
       // Set loading state
       setScrapeStatus("Scraping");
 
-      const response = await fetch("/api/scrape", {
+      // Step 1: Scrape the website
+      const scrapeResponse = await fetch("/api/scrape", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
       });
 
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Failed to scrape");
+      const scrapeData = await scrapeResponse.json();
+      if (!scrapeResponse.ok) throw new Error(scrapeData.error || "Failed to scrape");
 
-      // Update with the response data
-      setJsonData(data);
+      // Update status for optimization phase
+      setScrapeStatus("Optimizing");
+
+      // Step 2: Send the scraped data to the optimize endpoint
+      try {
+        const optimizeResponse = await fetch("/api/optimize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(scrapeData.data),
+        });
+
+        const optimizeData = await optimizeResponse.json();
+        
+        if (optimizeResponse.ok) {
+          // Use the optimized data
+          const finalData = {
+            success: true,
+            url: scrapeData.url,
+            data: optimizeData.data,
+          };
+          setJsonData(finalData);
+        } else {
+          // Fallback to scraped data if optimization fails
+          console.warn("Optimization failed, using scraped data instead:", optimizeData.error);
+          setJsonData(scrapeData);
+        }
+      } catch (optimizeError) {
+        // Fallback to scraped data if optimization fails
+        console.warn("Optimization error, using scraped data instead:", optimizeError);
+        setJsonData(scrapeData);
+      }
+
+      // Reset status and clear input
       setScrapeStatus(null);
       setUrl("");
     } catch (error: any) {
@@ -92,7 +131,8 @@ export function Text() {
           }}
         />
         <button onClick={scrapeWebsite} className="diveButton">
-          {scrapeStatus ? "Processing..." : "Scrape"}
+          {scrapeStatus === "Scraping" ? "Scraping..." : 
+           scrapeStatus === "Optimizing" ? "Optimizing..." : "Scrape"}
         </button>
       </div>
       <div className="code-container">
