@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 interface ScrapeItem {
   type: string;
   text: string;
-  [key: string]: any;
+  [key: string]: string | number | boolean | object;
 }
 
 interface ContentSection {
