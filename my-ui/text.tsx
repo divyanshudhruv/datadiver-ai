@@ -136,7 +136,7 @@ export function Text() {
         </button>
       </div>
       <div className="code-container">
-        <div
+        <button
           className="copy"
           onClick={() => {
             const textToCopy =
@@ -149,7 +149,7 @@ export function Text() {
           }}
         >
           <Copy size={16} />
-        </div>
+        </button>
         <pre dangerouslySetInnerHTML={{ __html: highlightJson(jsonData) }} />
       </div>
     </div>
