@@ -178,7 +178,7 @@ export async function POST(req: Request) {
             const sectionKey = headingText
             .toLowerCase()
             .replace(/([^a-z0-9]+)/g, "_")
-            .replace(/^(_+)|(_+)$/g, "")
+            .replace(/^(?:_+)|(?:_+)$/g, "")
             .substring(0, 30);
 
           // Skip if the section already exists
@@ -340,8 +340,8 @@ export async function POST(req: Request) {
             // Create a section key
             const sectionKey = sectionTitle
               .toLowerCase()
-              .replace(/[^a-z0-9]+/g, "_")
-              .replace(/^_+|_+$/g, "")
+              .replace(/([^a-z0-9]+)/g, "_")
+              .replace(/(^_+)|(_+$)/g, "")
               .substring(0, 30);
 
             // Skip if the section already exists
